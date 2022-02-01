@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h3>{% block title %}Some Cool Messages{% endblock %}</h3>
+    <h3 style="color:blue;">{% block title %}Some Cool Messages{% endblock %}</h3>
     <br>
 {% endblock %}
 
 {% block content %}
     {% if disp %}
         {% for m in disp %}
-            id: {{m[0]}} <br>
-            from: {{m[1]}} <br>
-            message: {{m[2]}}<br><br>
+            From: {{m[1]}} <br>
+            Message: {{m[2]}}<br><br>
         {% endfor %}
     {% endif %}
 {% endblock %}
