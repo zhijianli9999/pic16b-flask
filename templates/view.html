@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h2>{% block title %}View{% endblock %}</<h2>
+    <h3>{% block title %}Some Cool Messages{% endblock %}</h3>
+    <br>
+{% endblock %}
+
+{% block content %}
+    {% if disp %}
+        {% for m in disp %}
+            id: {{m[0]}} <br>
+            from: {{m[1]}} <br>
+            message: {{m[2]}}<br><br>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

@@ -3,24 +3,10 @@
 
 
 from flask import Flask, g, render_template, request
-
 import sqlite3
-
-import io
-import base64
 
 
 app = Flask(__name__)
-
-
-@app.route('/')
-def main():
-    return render_template('main_better.html')
-
-
-@app.route('/view/')
-def view():
-    return render_template('view.html')
 
 
 def get_message_db():
@@ -54,10 +40,25 @@ def insert_message(request):
     return msg, hnd
 
 
-@app.route('/submit/', methods=['POST', 'GET'])
+def random_messages(n):
+    db = get_message_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM messages ORDER BY RANDOM() LIMIT " + str(n))
+    m = cursor.fetchall()
+    db.close()
+    return m
+
+
+@app.route('/', methods=['POST', 'GET'])
 def submit():
     if request.method == 'GET':
         return render_template('submit.html')
     else:
         insert_message(request=request)
         return render_template('submit.html', thanks=True)
+
+
+@app.route('/view/')
+def view():
+    m = random_messages(2)
+    return render_template('view.html', disp=m)
