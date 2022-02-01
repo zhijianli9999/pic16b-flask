@@ -1,10 +1,8 @@
 # to run this website and watch for changes:
 # $ export FLASK_ENV=development; flask run
 
-
 from flask import Flask, g, render_template, request
 import sqlite3
-
 
 app = Flask(__name__)
 
